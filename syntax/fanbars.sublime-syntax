@@ -1,0 +1,60 @@
+%YAML 1.2
+---
+name: HTML (Fanbars)
+file_extensions:
+  - fbs
+first_line_match: (?i)<(!DOCTYPE\s*)?html
+scope: embedding.fanbars
+contexts:
+  main:
+    - match: ""
+      push: "Packages/HTML/HTML.sublime-syntax"
+      with_prototype:
+        # # Comment
+        # - match: "{{\\s*!"
+        #   push:
+        #     - meta_scope: comment.block.fanbars
+        #     - match: "}}"
+        #       pop: true
+        # Partial
+        # - match: "{{(?=\\s*>)"
+        #   scope: storage.type.other.fanbars
+        #   push:
+        #     - meta_content_scope: variable.parameter.fanbars
+        #     - match: "}}"
+        #       scope: storage.type.other.fanbars
+        #       pop: true
+        #     - match: ">"
+        #       scope: keyword.control.import.fanbars
+        # (Inverted) Section && Unescaped Variable
+        # - match: "{{(?=\\s*[#^/=&])"
+        #   scope: storage.type.function.fanbars
+        #   push:
+        #     - meta_content_scope: variable.parameter.fanbars
+        #     - match: "}}"
+        #       scope: storage.type.function.fanbars
+        #       pop: true
+        #     - match: "[#^=/&]"
+        #       scope: entity.name.function.fanbars
+        #     - match: "\\."
+        #       scope: keyword.operator.accessor.fanbars
+        # Unescaped Variable
+        - match: "{{{"
+          scope: variable.function.fanbars
+          push:
+            - meta_content_scope: variable.parameter.fanbars
+            - match: "}}}"
+              scope: variable.function.fanbars
+              pop: true
+            - match: \.
+              scope: keyword.operator.accessor.fanbars
+        # Escaped Variable
+        - match: "{{"
+          scope: variable.function.fanbars
+          push:
+            - meta_content_scope: variable.parameter.fanbars
+            - match: "}}"
+              scope: variable.function.fanbars
+              pop: true
+            - match: \.
+              scope: keyword.operator.accessor.fanbars
