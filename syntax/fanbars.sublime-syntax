@@ -10,12 +10,12 @@ contexts:
     - match: ""
       push: "Packages/HTML/HTML.sublime-syntax"
       with_prototype:
-        # # Comment
-        # - match: "{{\\s*!"
-        #   push:
-        #     - meta_scope: comment.block.fanbars
-        #     - match: "}}"
-        #       pop: true
+        # Comment
+        - match: "{{!--"
+          push:
+            - meta_scope: comment.block.fanbars
+            - match: "--}}"
+              pop: true
         # Partial
         # - match: "{{(?=\\s*>)"
         #   scope: storage.type.other.fanbars
