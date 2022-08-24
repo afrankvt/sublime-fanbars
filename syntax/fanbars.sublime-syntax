@@ -4,7 +4,7 @@ name: HTML (Fanbars)
 file_extensions:
   - fbs
 first_line_match: (?i)<(!DOCTYPE\s*)?html
-scope: embedding.fanbars
+scope: text.html.fanbars
 contexts:
   main:
     - match: ""
